@@ -3,8 +3,8 @@ package vn.com.nguacon.service;
 
 /*
  * Input: 
- * 		age: integer [5, 100]: age<=15 || age >= 65 => giam 50%
- * 		loai khach hang: VIP, NORMAL  VIP: giam 10%
+ * 		age: integer [5, 100]: age<=15 || age >= 65 => giảm 50%
+ * 		loai khach hang: VIP, NORMAL  VIP: giảm 10%
  * 
  * Output: 
  * 		age < 5 hoặc age > 100: "invalid age"
