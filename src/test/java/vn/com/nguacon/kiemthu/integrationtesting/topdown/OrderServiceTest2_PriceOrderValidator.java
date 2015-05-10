@@ -62,7 +62,7 @@ public class OrderServiceTest2_PriceOrderValidator {
 	}
 
 	@Test
-	public void kiemtra_trongbiendotransan_voima_VND_15500() {
+	public void kiemtra_trongbiendotransan_voima_VND() {
 		order = new Order("VND", 12000, 500);
 		OrderResult orderResult = orderService.place(order);
 		
