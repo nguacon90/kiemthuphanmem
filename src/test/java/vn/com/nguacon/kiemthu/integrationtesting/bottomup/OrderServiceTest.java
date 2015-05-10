@@ -37,48 +37,48 @@ public class OrderServiceTest {
 				priceValidator, quantityValidator);
 	}
 
-	@Test
-	public void test_PlaceOrder_WithAAAA_ShouldReceiveInvalidSymbolMessage() {
-		Order order = new Order("AAAA", 0, 0);
-		try {
-			orderServiceDriver.place(order);
-			fail("must throw exception");
-		} catch (ValidateExeption e) {
-			assertEquals(OrderStatus.INVALID_SYMBOL.getMessage(),
-					e.getMessage());
-		}
-	}
-
-	@Test
-	public void kiemtra_giathap_hon_giasan_voima_VND() {
-		order = new Order("VND", 8000, 500);
-		try {
-			orderServiceDriver.place(order);
-			fail("must throw exception");
-		} catch (ValidateExeption e) {
-			assertEquals(OrderStatus.PRICE_NOT_RANGE.getMessage(),
-					e.getMessage());
-		}
-	}
-
-	@Test
-	public void kiemtra_trongbiendotransan_voima_VND() throws ValidateExeption {
-		order = new Order("VND", 11000, 500);
-		orderServiceDriver.place(order);
-		assertTrue(true);
-	}
-
-	@Test
-	public void kiemtra_khoiluongKhongHopLe_voima_VND() {
-		order = new Order("VND", 9200, -100);
-		try {
-			orderServiceDriver.place(order);
-			fail("must throw exception");
-		} catch (ValidateExeption e) {
-			assertEquals(OrderStatus.INVALID_QUANTITY.getMessage(),
-					e.getMessage());
-		}
-	}
+//	@Test
+//	public void test_PlaceOrder_WithAAAA_ShouldReceiveInvalidSymbolMessage() {
+//		Order order = new Order("AAAA", 0, 0);
+//		try {
+//			orderServiceDriver.place(order);
+//			fail("must throw exception");
+//		} catch (ValidateExeption e) {
+//			assertEquals(OrderStatus.INVALID_SYMBOL.getMessage(),
+//					e.getMessage());
+//		}
+//	}
+//
+//	@Test
+//	public void kiemtra_giathap_hon_giasan_voima_VND() {
+//		order = new Order("VND", 8000, 500);
+//		try {
+//			orderServiceDriver.place(order);
+//			fail("must throw exception");
+//		} catch (ValidateExeption e) {
+//			assertEquals(OrderStatus.PRICE_NOT_RANGE.getMessage(),
+//					e.getMessage());
+//		}
+//	}
+//
+//	@Test
+//	public void kiemtra_trongbiendotransan_voima_VND() throws ValidateExeption {
+//		order = new Order("VND", 11000, 500);
+//		orderServiceDriver.place(order);
+//		assertTrue(true);
+//	}
+//
+//	@Test
+//	public void kiemtra_khoiluongKhongHopLe_voima_VND() {
+//		order = new Order("VND", 9200, -100);
+//		try {
+//			orderServiceDriver.place(order);
+//			fail("must throw exception");
+//		} catch (ValidateExeption e) {
+//			assertEquals(OrderStatus.INVALID_QUANTITY.getMessage(),
+//					e.getMessage());
+//		}
+//	}
 
 	@Test
 	public void kiemtra_khoiluong_KhongChanLo_voima_VND() {
