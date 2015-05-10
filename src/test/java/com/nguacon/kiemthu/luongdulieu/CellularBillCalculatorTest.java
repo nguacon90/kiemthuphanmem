@@ -3,6 +3,7 @@ package com.nguacon.kiemthu.luongdulieu;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CellularBillCalculatorTest {
@@ -27,6 +28,7 @@ public class CellularBillCalculatorTest {
 	}
 	
 	@Test
+	@Ignore
 	public void test_usage_is_156() {
 		double actual = calculator.calculateBill(156);
 		assertEquals(68, actual, 0);

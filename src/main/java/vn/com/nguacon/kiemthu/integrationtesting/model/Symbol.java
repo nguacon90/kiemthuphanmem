@@ -1,4 +1,4 @@
-package vn.com.nguacon;
+package vn.com.nguacon.kiemthu.integrationtesting.model;
 
 public class Symbol {
 	private String code;

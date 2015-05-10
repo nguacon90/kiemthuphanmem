@@ -1,4 +1,4 @@
-package vn.com.nguacon.service;
+package vn.com.nguacon.kiemthu.functionaltesting;
 
 
 /*
@@ -8,7 +8,7 @@ package vn.com.nguacon.service;
  * 
  * Output: 
  * 		age < 5 hoặc age > 100: "invalid age"
- * 		trả về % giảm giá "N%"	
+ * 		trả v�? % giảm giá "N%"	
  */
 public class TicketService {
 	

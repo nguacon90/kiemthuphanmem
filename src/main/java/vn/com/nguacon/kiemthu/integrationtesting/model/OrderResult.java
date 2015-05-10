@@ -1,4 +1,5 @@
-package vn.com.nguacon;
+package vn.com.nguacon.kiemthu.integrationtesting.model;
+
 
 public class OrderResult {
 	private String message;

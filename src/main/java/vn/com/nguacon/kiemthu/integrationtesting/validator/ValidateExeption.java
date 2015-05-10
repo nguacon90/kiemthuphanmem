@@ -1,4 +1,4 @@
-package vn.com.nguacon;
+package vn.com.nguacon.kiemthu.integrationtesting.validator;
 
 @SuppressWarnings("serial")
 public class ValidateExeption extends Exception {

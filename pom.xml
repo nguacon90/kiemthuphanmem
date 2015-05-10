@@ -4,7 +4,10 @@
 	<groupId>vn.com.nguacon</groupId>
 	<artifactId>kiemthu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -12,5 +15,14 @@
 			<version>4.12</version>
 		</dependency>
 	</dependencies>
-
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>*.txt</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
 </project>

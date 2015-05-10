@@ -1,11 +1,12 @@
-package vn.com.nguacon.service;
+package vn.com.nguacon.kiemthu.functionaltesting;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import vn.com.nguacon.service.TicketService;
+import vn.com.nguacon.kiemthu.functionaltesting.TicketService;
 
 public class TicketServiceEquivalencePartitionTest {
 	
@@ -25,6 +26,7 @@ public class TicketServiceEquivalencePartitionTest {
 	
 	//age = 5
 	@Test
+	@Ignore
 	public void test2(){
 		String actual = ticketService.getPromotion(5, false);
 		assertEquals("50%", actual);
@@ -46,6 +48,7 @@ public class TicketServiceEquivalencePartitionTest {
 
 	// age = 100, not vip
 	@Test
+	@Ignore
 	public void test5(){
 		String actual = ticketService.getPromotion(100, false);
 		assertEquals("50%", actual);

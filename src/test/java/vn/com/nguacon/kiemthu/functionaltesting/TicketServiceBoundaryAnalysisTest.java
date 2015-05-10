@@ -1,13 +1,13 @@
-package vn.com.nguacon.service;
+package vn.com.nguacon.kiemthu.functionaltesting;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import vn.com.nguacon.service.TicketService;
+import vn.com.nguacon.kiemthu.functionaltesting.TicketService;
 
-public class TicketServiceDicisionTableTest {
+public class TicketServiceBoundaryAnalysisTest {
 	
 	private TicketService ticketService;
 	

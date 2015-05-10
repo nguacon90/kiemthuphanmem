@@ -1,21 +1,33 @@
-package vn.com.nguacon;
+package vn.com.nguacon.kiemthu.equivalencetesting;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import vn.com.nguacon.kiemthu.integrationtesting.OrderService;
+import vn.com.nguacon.kiemthu.integrationtesting.OrderServiceImpl;
+import vn.com.nguacon.kiemthu.integrationtesting.model.Order;
+import vn.com.nguacon.kiemthu.integrationtesting.model.OrderResult;
+import vn.com.nguacon.kiemthu.integrationtesting.model.OrderStatus;
+import vn.com.nguacon.kiemthu.integrationtesting.service.SymbolService;
+import vn.com.nguacon.kiemthu.integrationtesting.topdown.stubs.SymbolServiceStub;
+import vn.com.nguacon.kiemthu.integrationtesting.validator.PriceValidator;
+import vn.com.nguacon.kiemthu.integrationtesting.validator.QuantityValidator;
+import vn.com.nguacon.kiemthu.integrationtesting.validator.SymbolValidator;
+import vn.com.nguacon.kiemthu.integrationtesting.validator.Validator;
+
 /*
  * Mô tả bài toán:
  * - Kiểm tra service đặt lệnh mua chứng khoán sàn HNX
  * - Object Order: price, quantity, symbol
- * - Điều kiện: floorPrice <= price <= ceilingPrice của mã chứng khoán tương ứng; price % 100 = 0
+ * - �?i�?u kiện: floorPrice <= price <= ceilingPrice của mã chứng khoán tương ứng; price % 100 = 0
  * 				0 < quantity <= 1.000.000; quantity % 100 = 0
  * 				symbol: thuộc sản HNX 
  * 
- * - Đầu ra: 
+ * - �?ầu ra: 
  * 			 - symbol: nếu mã không thuộc sàn HNX -> báo lỗi "Mã chứng khoán không đúng" 
- * 			 - nếu giá không nằm trong biên độ trần sàn trả về: "Giá không nằm trong biên độ trần sàn"
+ * 			 - nếu giá không nằm trong biên độ trần sàn trả v�?: "Giá không nằm trong biên độ trần sàn"
  * 			 - nếu giá trong biên độ trần sàn nhưng không chia hêt cho 100 thì báo "Sai bước giá"
  * 			 - quantity <= 0 báo "Số lượng phải lớn hơn 0"
  * 			 - quantity > 1.000.000 báo "Số lượng không được vượt quá 1000000"
@@ -24,15 +36,19 @@ import org.junit.Test;
 
 public class OrderServiceTest {
 	private OrderService orderService;
-	private OrderValidator orderValidator;
+	private Validator symbolValidator;
+	private Validator priceValidator;
+	private Validator quantityValidator;
 	private SymbolService symbolService;
 	private Order order;
 
 	@Before
 	public void setUp() {
-		symbolService = new SymbolService();
-		orderValidator = new OrderValidatorImpl(symbolService);
-		orderService = new OrderServiceImpl(orderValidator);
+		symbolService = new SymbolServiceStub();
+		symbolValidator = new SymbolValidator(symbolService);
+		priceValidator = new PriceValidator(symbolService);
+		quantityValidator = new QuantityValidator();
+		orderService = new OrderServiceImpl(symbolValidator, priceValidator, quantityValidator);
 	}
 
 	// symbol: ABCD, price=10000, quantity=5000 => "Mã chứng khoán không đúng" (nom, nom, nom)
@@ -45,7 +61,7 @@ public class OrderServiceTest {
 				orderResult.getMessage());
 	}
 
-	// symbol: VND, price=11000, quantity=500 => "Đặt lệnh thành công" (nom, min, nom)
+	// symbol: VND, price=11000, quantity=500 => "�?ặt lệnh thành công" (nom, min, nom)
 	@Test
 	public void kiemtra_giabanggiasan_voima_VND() {
 		order = new Order("VND", 11000, 500);
@@ -56,7 +72,7 @@ public class OrderServiceTest {
 	}
 	
 
-	// symbol: VND, price=13500, quantity=500 => "Đặt lệnh thành công" (nom, max, nom)
+	// symbol: VND, price=13500, quantity=500 => "�?ặt lệnh thành công" (nom, max, nom)
 	@Test
 	public void kiemtra_giabanggiatran_voima_VND() {
 		order = new Order("VND", 13500, 500);
@@ -96,10 +112,10 @@ public class OrderServiceTest {
 				orderResult.getMessage());
 	}
 	
-	// symbol: VND, price=13501, quantity=500 => "Sai bước giá" (nom, max+, nom)
+	// symbol: VND, price=15501, quantity=500 => "Sai bước giá" (nom, max+, nom)
 	@Test
 	public void kiemtra_giacaohongiatran_voima_VND() {
-		order = new Order("VND", 13501, 500);
+		order = new Order("VND", 15501, 500);
 		OrderResult orderResult = orderService.place(order);
 		
 		assertEquals(OrderStatus.PRICE_NOT_RANGE.getMessage(),

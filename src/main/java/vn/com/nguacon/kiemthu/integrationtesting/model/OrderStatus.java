@@ -1,4 +1,4 @@
-package vn.com.nguacon;
+package vn.com.nguacon.kiemthu.integrationtesting.model;
 
 public enum OrderStatus {
 	INVALID_SYMBOL("Mã chứng khoán không đúng"), OK("Đặt lệnh thành công"),
